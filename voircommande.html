@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin SHIFT & CHILL</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .order-card { 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .order-header { 
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .order-status { 
+            padding: 5px 10px; 
+            border-radius: 3px; 
+            font-weight: bold;
+        }
+        .pending { background: #FFF3CD; color: #856404; }
+        .completed { background: #D4EDDA; color: #155724; }
+        button { 
+            padding: 5px 10px; 
+            margin-right: 5px; 
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Commandes SHIFT & CHILL</h1>
+    <div id="orders-container"></div>
+
+    <script>
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('shiftchill_orders')) || [];
+            const container = document.getElementById('orders-container');
+            
+            if (orders.length === 0) {
+                container.innerHTML = "<p>Aucune commande pour le moment</p>";
+                return;
+            }
+            
+            container.innerHTML = orders.map((order, index) => `
+                <div class="order-card">
+                    <div class="order-header">
+                        <h3>Commande #${index + 1} - ${new Date(order.date).toLocaleString()}</h3>
+                        <span class="order-status ${order.status === 'completée' ? 'completed' : 'pending'}">
+                            ${order.status}
+                        </span>
+                    </div>
+                    <p><strong>Produit:</strong> ${order.product} (${order.price.toFixed(2)} €)</p>
+                    <p><strong>Client:</strong> ${order.client.name}</p>
+                    <p><strong>Téléphone:</strong> <a href="tel:${order.client.phone}">${order.client.phone}</a></p>
+                    <p><strong>Adresse:</strong> ${order.client.address}</p>
+                    <div>
+                        <button onclick="updateOrderStatus(${index}, 'completée')">Marquer comme complète</button>
+                        <button onclick="contactClient('${order.client.phone}')">Contacter le client</button>
+                        <button onclick="deleteOrder(${index})" style="background: #f8d7da; color: #721c24;">Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateOrderStatus(index, status) {
+            const orders = JSON.parse(localStorage.getItem('shiftchill_orders')) || [];
+            if (orders[index]) {
+                orders[index].status = status;
+                localStorage.setItem('shiftchill_orders', JSON.stringify(orders));
+                loadOrders();
+            }
+        }
+
+        function contactClient(phone) {
+            window.open(`https://wa.me/${phone}`, '_blank');
+        }
+
+        function deleteOrder(index) {
+            if (confirm('Supprimer cette commande ?')) {
+                const orders = JSON.parse(localStorage.getItem('shiftchill_orders')) || [];
+                orders.splice(index, 1);
+                localStorage.setItem('shiftchill_orders', JSON.stringify(orders));
+                loadOrders();
+            }
+        }
+
+        // Charger les commandes au démarrage
+        window.onload = loadOrders;
+    </script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIFT & CHILL - Boutique Streetwear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color:rgb(12, 12, 12);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ff0000;
+        }
+        
+        .logo img {
+            height: 200px;
+            width: 200px;
+            margin-left: 20px;
+            color: #ff0000;
+            
+
+        }
+        
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-left: 15px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #ff0000;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('image/fem1.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff0000;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #cc0000;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+        
+        /* Nouveautés */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .product-info .price {
+            font-weight: 700;
+            color: #ff0000;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Catégories */
+        .categories {
+            background-color: #f1f1f1;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .category-card {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 110%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+        }
+        
+        .category-overlay h3 {
+            font-size: 1.5rem;
+        }
+        
+        /* Contact */
+        .contact {
+            background-color: #000;
+            color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ff0000;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+        }
+        
+        .contact-form button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background-color: #cc0000;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 50px;
+            width: 60px;
+            padding: ;
+        }
+        
+        .footer-links {
+            margin: 30px 0;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin: 20px 0;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="image/logo.png" alt="SHIFT & CHILL Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#nouveautes">Nouveautés</a></li>
+                    <li><a href="#categories">Catégories</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="https://facebook.com/shift_chill" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/shift_chill" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/53351371" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>SHIFT & CHILL</h1>
+            <p>Découvrez notre collection exclusive de streetwear</p>
+            <a href="#nouveautes" class="btn">Voir les nouveautés</a>
+        </div>
+    </section>
+
+    <!-- Nouveautés -->
+    <section id="nouveautes">
+        <div class="container">
+            <h2>NOS NOUVEAUTÉS</h2>
+            <div class="products-grid" id="products-container">
+                <!-- Produits chargés dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Catégories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2>NOS CATÉGORIES</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <img src="image/im1.jpg" alt="Homme">
+                    <div class="category-overlay">
+                        <h3>HOMME</h3>
+                        <a href="collection.html" class="btn">Voir la collection</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="image/fem1.png" alt="Femme">
+                    <div class="category-overlay">
+                        <h3>FEMME</h3>
+                        <a href="collection.html" class="btn">Voir la collection</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="image/im7 (3).jpg" alt="Accessoires">
+                    <div class="category-overlay">
+                        <h3>ACCESSOIRES</h3>
+                        <a href="collection.html" class="btn">Voir la collection</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>CONTACTEZ-NOUS</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informations</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Adresse: Abidjan abatta</p>
+                    <p><i class="fas fa-phone"></i> Téléphone: +225 0153351371</p>
+                    <p><i class="fas fa-envelope"></i> Email: shiftchill125@gmail.com</p>
+                    
+                    <div class="social-links">
+                        <h3>Suivez-nous</h3>
+                        <a href="https://facebook.com/shift_chill" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/shift_chill" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/53351371" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Envoyez-nous un message</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Votre nom" required>
+                        <input type="email" placeholder="Votre email" required>
+                        <input type="text" placeholder="Sujet">
+                        <textarea placeholder="Votre message" required></textarea>
+                        <button type="submit">Envoyer</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="image/logo.png" alt="SHIFT & CHILL Logo" height="300px" width="200px">
+            </div>
+            <div class="footer-links">
+                <a href="#accueil">Accueil</a>
+                <a href="#nouveautes">Nouveautés</a>
+                <a href="#categories">Catégories</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Mentions légales</a>
+                <a href="#">CGV</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SHIFT & CHILL. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Données des produits
+        // Remplacer la partie produits dans index.html
+
+    // ...
+];
+
+// Le reste du code reste identique
+const products = JSON.parse(localStorage.getItem('shiftchill_products')) || [
+    // Produits par défaut (optionnel)
+    {
+        id: 1,
+        name: "T-shirt SHIFT Noir",
+        price: 29.99,
+        image: "tshirt-noir.jpg",
+        category: "homme"
+    },
+            {
+                id: 2,
+                name: "Sweat à capuche CHILL",
+                price: 59.99,
+                image: "sweat-capuche.jpg",
+                category: "femme"
+            },
+            {
+                id: 3,
+                name: "Casquette SHIFT",
+                price: 24.99,
+                image: "casquette.jpg",
+                category: "accessoires"
+            },
+            {
+                id: 4,
+                name: "Jean Street SHIFT",
+                price: 79.99,
+                image: "jean.jpg",
+                category: "homme"
+            },
+            {
+                id: 5,
+                name: "T-shirt CHILL Blanc",
+                price: 29.99,
+                image: "tshirt-blanc.jpg",
+                category: "femme"
+            },
+            {
+                id: 6,
+                name: "Sac SHIFT & CHILL",
+                price: 49.99,
+                image: "sac.jpg",
+                category: "accessoires"
+            }
+        ];
+
+        // Afficher les produits
+        function displayProducts() {
+            const productsContainer = document.getElementById('products-container');
+            productsContainer.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <div class="price">${product.price.toFixed(2)} €</div>
+                        <button class="whatsapp-btn" onclick="orderProduct(${product.id})">
+                            <i class="fab fa-whatsapp"></i> Commander
+                        </button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+       
+
+// AJOUTEZ CETTE NOUVELLE FONCTION APRÈS orderProduct()
+function saveOrder(product, name, phone, address) {
+    const orders = JSON.parse(localStorage.getItem('shiftchill_orders')) || [];
+    orders.push({
+        date: new Date().toISOString(),
+        product: product.name,
+        price: product.price,
+        client: { name, phone, address },
+        status: "en attente"
+    });
+    localStorage.setItem('shiftchill_orders', JSON.stringify(orders));
+}function orderProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    const whatsappNumber = "2250143028585"; // Votre numéro sans le +
+    
+    // Message pré-rempli avec les infos du produit
+    const message = `Bonjour SHIFT & CHILL,\n\n` +
+                   `Je suis intéressé par ce produit :\n` +
+                   `🔹 *${product.name}* (${product.price.toFixed(2)} €)\n\n` +
+                   `Pouvez-vous me donner plus d'informations ?\n` +
+                   `(Taille, disponibilité, délai de livraison...)`;
+    
+    // Redirection directe vers WhatsApp
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+}
+        
+    </script>
+</body>
+</html>
